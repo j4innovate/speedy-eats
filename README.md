@@ -96,7 +96,7 @@ To run this project locally on your machine:
 
 <div align="center">
 
-  Made with ❤️ for food lovers by **Speedy Eats Team**  
-  *© 2026 Speedy Eats Inc. All rights reserved.*
+  Made with ❤️ & Developed by **[Nayan Pitroda](https://github.com/nayan4472)**  
+  *© 2026 Speedy Eats. All rights reserved.*
 
 </div>
