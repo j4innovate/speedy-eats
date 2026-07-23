@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#068638"/>
+      <stop offset="100%" stop-color="#046328"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded Squircle Background -->
+  <rect width="512" height="512" rx="130" fill="url(#brandGrad)"/>
+
+  <!-- Outer Glow Ring -->
+  <rect x="12" y="12" width="488" height="488" rx="118" fill="none" stroke="#ffdc17" stroke-width="8" opacity="0.4"/>
+
+  <!-- Speed Motion Lines -->
+  <path d="M 45 190 L 135 190" stroke="#ffdc17" stroke-width="26" stroke-linecap="round"/>
+  <path d="M 30 256 L 150 256" stroke="#ffdc17" stroke-width="26" stroke-linecap="round"/>
+  <path d="M 60 322 L 130 322" stroke="#ffdc17" stroke-width="26" stroke-linecap="round"/>
+
+  <!-- Food Delivery Box -->
+  <rect x="170" y="180" width="76" height="76" rx="14" fill="#ffdc17"/>
+  <path d="M 208 180 L 208 256" stroke="#046328" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Delivery Rider Silhouette -->
+  <!-- Helmet -->
+  <circle cx="280" cy="155" r="32" fill="#ffffff"/>
+  <path d="M 255 160 C 255 135 305 135 305 160 Z" fill="#046328"/>
+
+  <!-- Rider Body & Arms -->
+  <path d="M 265 185 L 320 205 L 300 270 L 250 250 Z" fill="#ffffff"/>
+  <path d="M 305 210 L 350 220 L 355 240 L 315 230 Z" fill="#ffffff"/>
+
+  <!-- Scooter Frame -->
+  <path d="M 195 275 L 375 275 C 395 275 415 295 405 325 L 370 335 L 195 335 Z" fill="#ffffff"/>
+  <path d="M 355 235 L 375 205 L 388 212 L 370 242 Z" fill="#ffffff"/>
+
+  <!-- Wheels (Dark Grey with White Rims) -->
+  <circle cx="225" cy="350" r="44" fill="#111827"/>
+  <circle cx="225" cy="350" r="20" fill="#ffffff"/>
+  <circle cx="225" cy="350" r="8" fill="#111827"/>
+
+  <circle cx="365" cy="350" r="44" fill="#111827"/>
+  <circle cx="365" cy="350" r="20" fill="#ffffff"/>
+  <circle cx="365" cy="350" r="8" fill="#111827"/>
+
+  <!-- SPEEDY EATS Text Pill -->
+  <rect x="140" y="415" width="232" height="52" rx="26" fill="#ffdc17"/>
+  <text x="256" y="451" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="27" font-weight="900" fill="#046328" text-anchor="middle" letter-spacing="1">SPEEDY EATS</text>
+</svg>
