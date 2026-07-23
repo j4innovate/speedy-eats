@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner With Us - Speedy Eats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#068638',
+            brandGreenDark: '#046328',
+            brandMint: '#eaf7f0',
+            brandMintLight: '#e4f5eb',
+            brandPink: '#ec268f',
+            brandYellow: '#ffdc17',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            logo: ['"Fredoka"', 'cursive', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 font-sans antialiased relative">
+
+  <!-- Header -->
+  <header class="bg-brandGreen text-white py-4 px-4 sm:px-8 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="inline-block transform -rotate-3 transition hover:scale-105">
+        <span class="font-logo font-black text-3xl sm:text-4xl text-brandPink tracking-tight block">Speedy Eats</span>
+        <div class="h-1.5 bg-brandPink rounded-full mt-0.5 w-full"></div>
+      </a>
+      <a href="index.html" class="bg-white text-brandGreen font-bold px-5 py-2 rounded-full hover:bg-brandYellow hover:text-gray-900 transition-all text-sm shadow-md">
+        ← Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-brandGreen text-white py-16 px-4 sm:px-8 text-center rounded-b-[40px] shadow-lg">
+    <div class="max-w-3xl mx-auto space-y-4">
+      <span class="bg-white/20 text-white font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider">Grow Your Business</span>
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight">Partner With Speedy Eats</h1>
+      <p class="text-white/90 text-base sm:text-lg leading-relaxed">
+        Whether you own a restaurant or want to join as a delivery rider partner, grow your income with India's fairest delivery platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Partner Types -->
+  <section class="py-16 px-4 sm:px-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+    
+    <!-- Restaurant Partner -->
+    <div class="bg-brandMint rounded-3xl p-8 border border-emerald-100 space-y-6 shadow-sm hover:shadow-md transition">
+      <div class="w-16 h-16 bg-brandGreen text-white rounded-2xl flex items-center justify-center text-3xl shadow-md">🏪</div>
+      <h2 class="text-2xl font-extrabold text-gray-900">For Restaurants</h2>
+      <ul class="space-y-3 text-sm text-gray-700 font-medium">
+        <li class="flex items-center gap-2">✅ Low commission rates — keep more of your earnings</li>
+        <li class="flex items-center gap-2">✅ Instant weekly payouts straight to your bank</li>
+        <li class="flex items-center gap-2">✅ Access to thousands of hungry local customers</li>
+      </ul>
+      <button data-type="Restaurant" class="partner-btn w-full bg-brandGreen text-white font-bold py-3.5 rounded-xl hover:bg-brandGreenDark transition shadow-md">Register Restaurant</button>
+    </div>
+
+    <!-- Rider Partner -->
+    <div class="bg-brandMint rounded-3xl p-8 border border-emerald-100 space-y-6 shadow-sm hover:shadow-md transition">
+      <div class="w-16 h-16 bg-brandPink text-white rounded-2xl flex items-center justify-center text-3xl shadow-md">🛵</div>
+      <h2 class="text-2xl font-extrabold text-gray-900">For Delivery Riders</h2>
+      <ul class="space-y-3 text-sm text-gray-700 font-medium">
+        <li class="flex items-center gap-2">✅ High per-order payouts + 100% customer tips</li>
+        <li class="flex items-center gap-2">✅ Flexible working hours — full-time or part-time</li>
+        <li class="flex items-center gap-2">✅ Insurance coverage & safety equipment included</li>
+      </ul>
+      <button data-type="Rider" class="partner-btn w-full bg-brandPink text-white font-bold py-3.5 rounded-xl hover:bg-brandPinkHover transition shadow-md">Join as Delivery Rider</button>
+    </div>
+
+  </section>
+
+  <!-- Partner Modal -->
+  <div id="partner-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative space-y-6">
+      
+      <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+        <div>
+          <span class="text-xs font-extrabold text-brandGreen uppercase tracking-wider">Partner Registration</span>
+          <h3 id="modal-type-title" class="text-xl font-extrabold text-gray-900 leading-tight">Register with Us</h3>
+        </div>
+        <button id="close-partner-modal" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-500 hover:bg-gray-200">✕</button>
+      </div>
+
+      <form id="partner-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Name / Business Name</label>
+          <input type="text" required placeholder="e.g. Royal Spice Restaurant / Amit Patel" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-brandGreen text-sm" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Mobile Number</label>
+          <input type="tel" required placeholder="e.g. +91 98765 43210" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-brandGreen text-sm" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City</label>
+          <input type="text" required placeholder="e.g. Ahmedabad, Mumbai, Surat" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-brandGreen text-sm" />
+        </div>
+
+        <button type="submit" class="w-full bg-brandGreen text-white font-bold py-3.5 rounded-xl hover:bg-brandGreenDark transition shadow-md">Submit Onboarding Request 🤝</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="partner-toast" class="fixed bottom-6 right-6 bg-gray-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-3 transition-all duration-300">
+    <span class="text-brandPink text-xl">🤝</span>
+    <span id="partner-toast-message" class="text-sm font-semibold">Registration request received!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-brandMintLight pt-12 pb-8 px-4 sm:px-8 border-t border-emerald-100">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-gray-600">
+      <p>© 2026 Speedy Eats. All rights reserved.</p>
+      <p class="flex items-center gap-1">Made with <span class="text-brandPink">❤️</span> by <span class="text-gray-900 font-extrabold">Nayan</span> for Food Lovers in India</p>
+      <a href="index.html" class="hover:text-brandPink transition">Home</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('partner-modal');
+      const modalTypeTitle = document.getElementById('modal-type-title');
+      const closeModal = document.getElementById('close-partner-modal');
+      const form = document.getElementById('partner-form');
+      const toast = document.getElementById('partner-toast');
+      const toastMessage = document.getElementById('partner-toast-message');
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        }, 4000);
+      }
+
+      document.querySelectorAll('.partner-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const type = e.target.getAttribute('data-type');
+          modalTypeTitle.textContent = type === 'Restaurant' ? 'Register Restaurant' : 'Join as Delivery Rider';
+          modal.classList.remove('hidden');
+          setTimeout(() => modal.classList.add('opacity-100'), 10);
+        });
+      });
+
+      closeModal.addEventListener('click', () => {
+        modal.classList.remove('opacity-100');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('opacity-100');
+          setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        modal.classList.remove('opacity-100');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+        showToast(`🎉 Onboarding request for "${modalTypeTitle.textContent}" received! Our team will contact you within 24 hours.`);
+        form.reset();
+      });
+    });
+  </script>
+
+</body>
+
+</html>

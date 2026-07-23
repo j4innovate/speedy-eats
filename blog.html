@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speedy Blog - Speedy Eats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#068638',
+            brandGreenDark: '#046328',
+            brandMint: '#eaf7f0',
+            brandMintLight: '#e4f5eb',
+            brandPink: '#ec268f',
+            brandYellow: '#ffdc17',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            logo: ['"Fredoka"', 'cursive', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 font-sans antialiased">
+
+  <!-- Header -->
+  <header class="bg-brandGreen text-white py-4 px-4 sm:px-8 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="inline-block transform -rotate-3 transition hover:scale-105">
+        <span class="font-logo font-black text-3xl sm:text-4xl text-brandPink tracking-tight block">Speedy Eats</span>
+        <div class="h-1.5 bg-brandPink rounded-full mt-0.5 w-full"></div>
+      </a>
+      <a href="index.html" class="bg-white text-brandGreen font-bold px-5 py-2 rounded-full hover:bg-brandYellow hover:text-gray-900 transition-all text-sm shadow-md">
+        ← Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-brandGreen text-white py-16 px-4 sm:px-8 text-center rounded-b-[40px] shadow-lg">
+    <div class="max-w-3xl mx-auto space-y-4">
+      <span class="bg-white/20 text-white font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider">Foodie Digest</span>
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight">The Speedy Blog</h1>
+      <p class="text-white/90 text-base sm:text-lg leading-relaxed">
+        Stories, food guides, partner spotlights, and tips on getting the best food deals in town!
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Cards -->
+  <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Post 1 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition">
+        <div class="space-y-2">
+          <span class="text-xs font-extrabold text-brandPink uppercase tracking-wider">Food Guide</span>
+          <h3 class="text-xl font-bold text-gray-900 leading-snug">Top 10 Authentic Biryani Spots Delivered Fresh to Your Door</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Discover how we partner with top city chefs to bring genuine dum biryani without price inflations.</p>
+        </div>
+        <div class="text-xs font-bold text-gray-500 pt-4 border-t border-emerald-200/60 flex justify-between">
+          <span>July 2026</span>
+          <span class="text-brandGreen font-bold">5 min read</span>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition">
+        <div class="space-y-2">
+          <span class="text-xs font-extrabold text-brandGreen uppercase tracking-wider">Fair Pricing</span>
+          <h3 class="text-xl font-bold text-gray-900 leading-snug">Why Menu Price Transparency Matters to Everyday Diners</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">How hidden packaging and commission charges harm local restaurants and customers alike.</p>
+        </div>
+        <div class="text-xs font-bold text-gray-500 pt-4 border-t border-emerald-200/60 flex justify-between">
+          <span>June 2026</span>
+          <span class="text-brandGreen font-bold">4 min read</span>
+        </div>
+      </div>
+
+      <!-- Post 3 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition">
+        <div class="space-y-2">
+          <span class="text-xs font-extrabold text-brandYellow uppercase tracking-wider">Rider Stories</span>
+          <h3 class="text-xl font-bold text-gray-900 leading-snug">Meet Rahul: Delivering Happiness Across the City in 20 Minutes</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">A day in the life of our star delivery driver and how our smart routing keeps meals scorching hot.</p>
+        </div>
+        <div class="text-xs font-bold text-gray-500 pt-4 border-t border-emerald-200/60 flex justify-between">
+          <span>June 2026</span>
+          <span class="text-brandGreen font-bold">6 min read</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brandMintLight pt-12 pb-8 px-4 sm:px-8 border-t border-emerald-100">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-gray-600">
+      <p>© 2026 Speedy Eats. All rights reserved.</p>
+      <p class="flex items-center gap-1">Made with <span class="text-brandPink">❤️</span> by <span class="text-gray-900 font-extrabold">Nayan</span> for Food Lovers in India</p>
+      <a href="index.html" class="hover:text-brandPink transition">Home</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

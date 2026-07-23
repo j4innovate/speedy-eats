@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help & Support - Speedy Eats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#068638',
+            brandGreenDark: '#046328',
+            brandMint: '#eaf7f0',
+            brandMintLight: '#e4f5eb',
+            brandPink: '#ec268f',
+            brandYellow: '#ffdc17',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            logo: ['"Fredoka"', 'cursive', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 font-sans antialiased">
+
+  <!-- Header -->
+  <header class="bg-brandGreen text-white py-4 px-4 sm:px-8 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="inline-block transform -rotate-3 transition hover:scale-105">
+        <span class="font-logo font-black text-3xl sm:text-4xl text-brandPink tracking-tight block">Speedy Eats</span>
+        <div class="h-1.5 bg-brandPink rounded-full mt-0.5 w-full"></div>
+      </a>
+      <a href="index.html" class="bg-white text-brandGreen font-bold px-5 py-2 rounded-full hover:bg-brandYellow hover:text-gray-900 transition-all text-sm shadow-md">
+        ← Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-brandGreen text-white py-16 px-4 sm:px-8 text-center rounded-b-[40px] shadow-lg">
+    <div class="max-w-3xl mx-auto space-y-4">
+      <span class="bg-white/20 text-white font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider">24/7 Assistance</span>
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight">How Can We Help You?</h1>
+      <p class="text-white/90 text-base sm:text-lg leading-relaxed">
+        Have questions about an active order, refunds, or restaurant menu pricing? We're here to help 24/7.
+      </p>
+    </div>
+  </section>
+
+  <!-- Support Options Grid -->
+  <section class="py-16 px-4 sm:px-8 max-w-5xl mx-auto space-y-12">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Option 1 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 text-center space-y-3 shadow-sm hover:shadow-md transition">
+        <div class="w-14 h-14 bg-brandGreen text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">💬</div>
+        <h3 class="text-xl font-bold">Live Chat Support</h3>
+        <p class="text-gray-600 text-sm">Instant 1-minute response time directly inside the Speedy Eats mobile app.</p>
+      </div>
+
+      <!-- Option 2 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 text-center space-y-3 shadow-sm hover:shadow-md transition">
+        <div class="w-14 h-14 bg-brandPink text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">📧</div>
+        <h3 class="text-xl font-bold">Email Support</h3>
+        <p class="text-gray-600 text-sm">Reach our customer happiness team at <strong>support@speedyeats.com</strong></p>
+      </div>
+
+      <!-- Option 3 -->
+      <div class="bg-brandMint rounded-3xl p-6 border border-emerald-100 text-center space-y-3 shadow-sm hover:shadow-md transition">
+        <div class="w-14 h-14 bg-brandYellow text-gray-900 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">📞</div>
+        <h3 class="text-xl font-bold">Order Helpline</h3>
+        <p class="text-gray-600 text-sm">Call our toll-free support line at <strong>1800-SPEEDY-EATS</strong> for active order issues.</p>
+      </div>
+
+    </div>
+
+    <!-- FAQ Accordion / List -->
+    <div class="bg-brandMint rounded-3xl p-8 border border-emerald-100 space-y-6">
+      <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Frequently Asked Questions</h2>
+      
+      <div class="space-y-4">
+        <div class="bg-white p-5 rounded-2xl border border-emerald-100/80 space-y-1">
+          <h4 class="font-extrabold text-base text-gray-900">How do I track my active order?</h4>
+          <p class="text-sm text-gray-600">Open the Speedy Eats app and tap "My Orders" to see live GPS tracking of your delivery partner.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-100/80 space-y-1">
+          <h4 class="font-extrabold text-base text-gray-900">What if my order is delayed or missing items?</h4>
+          <p class="text-sm text-gray-600">Tap "Help" on your order screen in the app. Our support bot or live team will instantly issue a full refund or re-send missing items.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-100/80 space-y-1">
+          <h4 class="font-extrabold text-base text-gray-900">Is delivery really 100% free on orders over ₹99?</h4>
+          <p class="text-sm text-gray-600">Yes! There are no surge fees, weather fees, or small cart fees on orders over ₹99.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brandMintLight pt-12 pb-8 px-4 sm:px-8 border-t border-emerald-100">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-gray-600">
+      <p>© 2026 Speedy Eats. All rights reserved.</p>
+      <p class="flex items-center gap-1">Made with <span class="text-brandPink">❤️</span> by <span class="text-gray-900 font-extrabold">Nayan</span> for Food Lovers in India</p>
+      <a href="index.html" class="hover:text-brandPink transition">Home</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

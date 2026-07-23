@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speedy Eats - Cravings Calling. Answer Speedy Eats!</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#068638',
+            brandGreenDark: '#046328',
+            brandMint: '#eaf7f0',
+            brandMintLight: '#e4f5eb',
+            brandPink: '#ec268f',
+            brandPinkHover: '#d91b7d',
+            brandYellow: '#ffdc17',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            logo: ['"Fredoka"', 'cursive', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── animations ── */
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(-4deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(-2deg);
+      }
+    }
+
+    @keyframes floatBadge {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 8px 20px rgba(6, 134, 56, 0.2));
+      }
+
+      50% {
+        filter: drop-shadow(0 8px 40px rgba(6, 134, 56, 0.5));
+      }
+    }
+
+    @keyframes floatAvatar {
+
+      0%,
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+
+      50% {
+        transform: translateY(-8px) scale(1.02);
+      }
+    }
+
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .animate-badge {
+      animation: floatBadge 3s ease-in-out infinite;
+    }
+
+    .animate-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    .animate-avatar {
+      animation: floatAvatar 4s ease-in-out infinite;
+    }
+
+    /* ── Food emoji fallback ── */
+    .food-emoji-3d {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      line-height: 1;
+      background: linear-gradient(145deg, #fef9e7, #fdf2d0);
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 -6px 16px rgba(0, 0, 0, 0.08), 0 16px 32px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+    }
+
+    .food-emoji-3d.small {
+      font-size: 3rem;
+    }
+
+    .food-emoji-3d.large {
+      font-size: 5.5rem;
+    }
+
+    .group:hover .food-emoji-3d {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: inset 0 -6px 16px rgba(0, 0, 0, 0.08), 0 24px 48px rgba(6, 134, 56, 0.25);
+    }
+
+    /* ── Feature avatar wrap ── */
+    .feature-avatar-wrap {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0faf3;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      border: 4px solid #fff;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .feature-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feature-card:hover .feature-avatar-wrap {
+      transform: scale(1.05) translateY(-6px);
+      box-shadow: 0 24px 56px rgba(6, 134, 56, 0.25);
+    }
+
+    /* ── Hero rider ── */
+    .hero-rider-wrap {
+      filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.30));
+      transition: transform 0.4s ease;
+    }
+
+    .hero-rider-wrap:hover {
+      transform: scale(1.03);
+    }
+
+    /* ── Device frame ── */
+    .device-frame {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.04);
+    }
+
+    /* ── 3D food card ── */
+    .food-card-3d {
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.40);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .food-card-3d:hover {
+      transform: rotate(0deg) translateY(-6px);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ── Toast ── */
+    #toast {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @media (max-width: 640px) {
+      .food-emoji-3d {
+        font-size: 3rem;
+      }
+
+      .food-emoji-3d.large {
+        font-size: 3.8rem;
+      }
+
+      .feature-avatar-wrap {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* image fallback – show emoji if image missing */
+    .dish-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .dish-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .dish-img-wrap .food-emoji-3d {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 3rem;
+      background: #fef9e7;
+    }
+
+    .dish-img-wrap img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* For the circular dish grid */
+    .dish-circle-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fef9e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dish-circle-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dish-circle-wrap .food-emoji-3d {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 3.8rem;
+      background: #fef9e7;
+      z-index: 1;
+    }
+
+    @media (max-width: 640px) {
+      .dish-circle-wrap .food-emoji-3d {
+        font-size: 3rem;
+      }
+    }
+
+    /* Logo gentle float animation */
+    @keyframes logoFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-4px) rotate(-2deg);
+      }
+    }
+
+    .logo-animate {
+      animation: logoFloat 3.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 font-sans antialiased selection:bg-brandPink selection:text-white">
+
+  <!-- ====== HERO ====== -->
+  <section
+    class="bg-brandGreen text-white relative pt-6 sm:pt-8 pb-24 sm:pb-24 px-4 sm:px-6 lg:px-8 z-10 rounded-b-[40px] sm:rounded-b-[56px] lg:rounded-b-[64px] shadow-lg">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+
+        <!-- LEFT -->
+        <div class="lg:col-span-6 space-y-4 sm:space-y-5 text-center sm:text-left z-10 pl-0 sm:pl-10 lg:pl-16 flex flex-col items-center sm:items-start">
+
+          <!-- Logo -->
+          <div>
+            <a href="#" class="inline-block logo-animate transition hover:scale-105 mb-1">
+              <span
+                class="font-logo font-black text-4xl sm:text-5xl lg:text-6xl text-brandPink tracking-tight leading-none block drop-shadow-sm">
+                Speedy Eats
+              </span>
+              <div class="h-2 sm:h-2.5 bg-brandPink rounded-full mt-1 w-full shadow-sm"></div>
+            </a>
+          </div>
+
+          <!-- Headline -->
+          <h1
+            class="text-3xl sm:text-[44px] lg:text-[54px] font-black text-white tracking-tight leading-[1.08] drop-shadow-sm">
+            <span class="whitespace-nowrap">Cravings Calling.</span><br />
+            <span class="whitespace-nowrap">Answer Speedy Eats!</span>
+          </h1>
+
+          <!-- Store buttons -->
+          <div class="pt-3 sm:pt-6 flex flex-row gap-2 sm:gap-4 justify-center sm:justify-start items-center w-full max-w-[340px] sm:max-w-none mx-auto">
+            <a href="#download"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 sm:gap-3 bg-black text-white px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl hover:bg-gray-900 transition-all transform hover:-translate-y-0.5 border border-white/10 shadow-xl">
+              <svg class="w-5 h-5 sm:w-7 sm:h-7 shrink-0" viewBox="0 0 24 24">
+                <path fill="#4285F4"
+                  d="M3.609 1.814L13.792 12 3.61 22.186c-.378-.225-.61-.628-.61-1.077V2.891c0-.45.232-.852.61-1.077z" />
+                <path fill="#34A853"
+                  d="M17.18 8.613l-3.388 3.387 3.388 3.387 3.829-2.188c.732-.418.732-1.168 0-1.586l-3.829-2.186z" />
+                <path fill="#EA4335"
+                  d="M13.792 12L3.609 1.814C4.015 1.572 4.54 1.63 4.887 1.977l12.293 6.636L13.792 12z" />
+                <path fill="#FBBC05" d="M13.792 12l3.388 3.387L4.887 22.023c-.347.347-.872.405-1.278.163L13.792 12z" />
+              </svg>
+              <div class="text-left">
+                <div class="text-[8px] sm:text-[10px] uppercase font-bold tracking-widest text-gray-300 whitespace-nowrap">GET IT ON</div>
+                <div class="text-xs sm:text-sm font-extrabold leading-none whitespace-nowrap">Google Play</div>
+              </div>
+            </a>
+            <a href="#download"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 sm:gap-3 bg-black text-white px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl hover:bg-gray-900 transition-all transform hover:-translate-y-0.5 border border-white/10 shadow-xl">
+              <svg class="w-5 h-5 sm:w-7 sm:h-7 fill-white shrink-0" viewBox="0 0 384 512">
+                <path
+                  d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-13.7 69.5-34.3z" />
+              </svg>
+              <div class="text-left">
+                <div class="text-[8px] sm:text-[10px] uppercase font-bold tracking-wider text-gray-300 whitespace-nowrap">Download on</div>
+                <div class="text-xs sm:text-sm font-extrabold leading-none whitespace-nowrap">App Store</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div
+          class="lg:col-span-6 relative mt-8 lg:mt-0 flex flex-col items-center justify-center min-h-[330px] sm:min-h-[460px]">
+
+          <!-- Device frame -->
+          <div
+            class="absolute top-0 w-[88%] max-w-[310px] sm:max-w-[490px] h-[260px] sm:h-[370px] device-frame rounded-[36px] sm:rounded-[48px] p-3 sm:p-4 z-0 flex flex-col justify-start items-center">
+            <div
+              class="w-full bg-white/10 border border-white/20 rounded-full px-4 py-2 flex items-center gap-3 shadow-inner">
+              <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <div class="h-2.5 w-28 bg-white/30 rounded-full"></div>
+              <div class="ml-auto w-8 h-4 bg-brandPink/80 rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Rider Avatar – YOUR LOCAL 3D IMAGE -->
+          <div
+            class="relative z-10 w-[75%] max-w-[260px] sm:max-w-[430px] lg:max-w-[470px] pt-1 hero-rider-wrap animate-avatar">
+            <img src="assets/images/hero_rider_final.png?v=clean4" alt="Speedy Eats Delivery Rider"
+              class="w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.35)]" />
+          </div>
+
+          <!-- 3D Food Card -->
+          <div
+            class="absolute -bottom-16 sm:-bottom-28 inset-x-0 mx-auto z-30 w-[94%] max-w-[340px] sm:max-w-[490px] transform -rotate-3 hover:rotate-0 transition-all duration-300 food-card-3d">
+
+            <div
+              class="absolute -inset-1 bg-[#045220] rounded-[30px] transform translate-y-2 translate-x-1 border-2 border-[#023b16] z-0">
+            </div>
+
+            <div
+              class="relative z-10 bg-[#fffef4] text-gray-900 rounded-[28px] p-3 shadow-[0_25px_50px_rgba(0,0,0,0.35)] border-4 border-[#056127] flex items-center justify-between gap-2.5">
+
+              <!-- Masala Dosa -->
+              <div
+                class="flex-1 bg-white rounded-2xl p-2 flex flex-col items-center text-center shadow-sm border border-amber-100/80">
+                <div class="relative w-full h-18 sm:h-22 rounded-xl overflow-hidden mb-1 bg-amber-50 dish-img-wrap">
+                  <img src="assets/images/dish_dosa_master_v2.png" alt="Masala Dosa" class="dish-img" />
+                  <button
+                    class="absolute bottom-1 right-1 bg-brandPink text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center font-extrabold text-xs shadow-md hover:scale-110 transition-transform z-10">+</button>
+                </div>
+                <h4 class="font-extrabold text-xs text-gray-900 leading-tight">Masala Dosa</h4>
+                <div class="flex items-center gap-1 mt-0.5">
+                  <span class="font-extrabold text-xs text-gray-900">₹99</span>
+                  <span class="text-[10px] text-gray-400 line-through">₹107</span>
+                </div>
+              </div>
+
+              <!-- Pizza -->
+              <div
+                class="flex-1 bg-white rounded-2xl p-2 flex flex-col items-center text-center shadow-sm border border-red-100/80">
+                <div class="relative w-full h-18 sm:h-22 rounded-xl overflow-hidden mb-1 bg-red-50 dish-img-wrap">
+                  <img src="assets/images/dish_pizza_master_v2.png" alt="Pizza" class="dish-img" />
+                  <button
+                    class="absolute bottom-1 right-1 bg-brandPink text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center font-extrabold text-xs shadow-md hover:scale-110 transition-transform z-10">+</button>
+                </div>
+                <h4 class="font-extrabold text-xs text-gray-900 leading-tight">Pizza</h4>
+                <div class="flex items-center gap-1 mt-0.5">
+                  <span class="font-extrabold text-xs text-gray-900">₹129</span>
+                  <span class="text-[10px] text-gray-400 line-through">₹240</span>
+                </div>
+              </div>
+
+              <!-- Biryani -->
+              <div
+                class="flex-1 bg-white rounded-2xl p-2 flex flex-col items-center text-center shadow-sm border border-amber-100/80">
+                <div class="relative w-full h-18 sm:h-22 rounded-xl overflow-hidden mb-1 bg-amber-50 dish-img-wrap">
+                  <img src="assets/images/dish_biryani_master_v2.png" alt="Biryani" class="dish-img" />
+                  <button
+                    class="absolute bottom-1 right-1 bg-brandPink text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center font-extrabold text-xs shadow-md hover:scale-110 transition-transform z-10">+</button>
+                </div>
+                <h4 class="font-extrabold text-xs text-gray-900 leading-tight">Biryani</h4>
+                <div class="flex items-center gap-1 mt-0.5">
+                  <span class="font-extrabold text-xs text-gray-900">₹99</span>
+                  <span class="text-[10px] text-gray-400 line-through">₹107</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECTION 2: WHAT YOU GET TO ENJOY ====== -->
+  <section class="pt-24 sm:pt-16 pb-16 px-4 sm:px-6 lg:px-8 bg-white relative z-0">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-32 sm:mb-40 lg:mb-44">
+        What you get to enjoy
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-y-24 md:gap-y-20 gap-x-8">
+
+        <!-- Feature 1 -->
+        <div
+          class="feature-card relative bg-brandMint rounded-[36px] p-6 sm:p-8 pt-24 sm:pt-28 lg:pt-30 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-emerald-100/90 shadow-sm">
+          <div
+            class="absolute -top-[92px] sm:-top-[112px] lg:-top-[120px] inset-x-0 mx-auto w-44 h-44 sm:w-52 sm:h-52 lg:w-56 lg:h-56 flex items-center justify-center z-0 animate-avatar pointer-events-none">
+            <img src="assets/images/card1_offline_final.png?v=new2" alt="Offline Prices"
+              class="max-w-full max-h-full object-contain filter drop-shadow-[0_18px_30px_rgba(0,0,0,0.20)] hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="w-32 sm:w-36 h-1.5 bg-black/15 rounded-full mb-3.5 relative z-10"></div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Offline Prices, Online Convenience</h3>
+          <p class="text-gray-600 text-sm max-w-xs leading-relaxed">Pay what you see in the restaurant menu</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div
+          class="feature-card relative bg-brandMint rounded-[36px] p-6 sm:p-8 pt-24 sm:pt-28 lg:pt-30 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-emerald-100/90 shadow-sm">
+          <div
+            class="absolute -top-[96px] sm:-top-[118px] lg:-top-[126px] inset-x-0 mx-auto w-44 h-44 sm:w-52 sm:h-52 lg:w-56 lg:h-56 flex items-center justify-center z-0 animate-avatar pointer-events-none">
+            <img src="assets/images/card2_lowest_final.png?v=new2" alt="Lowest Prices"
+              class="max-w-full max-h-full object-contain filter drop-shadow-[0_18px_30px_rgba(0,0,0,0.20)] hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="w-32 sm:w-36 h-1.5 bg-black/15 rounded-full mb-3.5 relative z-10"></div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Lowest Prices of Items</h3>
+          <p class="text-gray-600 text-sm max-w-xs leading-relaxed">Dishes start at ₹49 & most are under ₹250!</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div
+          class="feature-card relative bg-brandMint rounded-[36px] p-6 sm:p-8 pt-24 sm:pt-28 lg:pt-30 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-emerald-100/90 shadow-sm">
+          <div
+            class="absolute -top-[84px] sm:-top-[104px] lg:-top-[110px] inset-x-0 mx-auto w-44 h-44 sm:w-52 sm:h-52 lg:w-56 lg:h-56 flex items-center justify-center z-0 animate-avatar pointer-events-none">
+            <img src="assets/images/card3_delivery_final.png?v=new2" alt="Free Delivery"
+              class="max-w-full max-h-full object-contain filter drop-shadow-[0_18px_30px_rgba(0,0,0,0.20)] hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="w-32 sm:w-36 h-1.5 bg-black/15 rounded-full mb-3.5 relative z-10"></div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Get Free Delivery for all orders</h3>
+          <p class="text-gray-600 text-sm max-w-xs leading-relaxed">Save on every order above ₹99</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECTION 3: ALL YOUR FAVOURITE DISHES ====== -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-14">
+        All your favourite dishes
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
+
+        <!-- Dish 1: Biryani -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_biryani_master_v2.png" alt="Biryani" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🍛</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹99</div>
+          </div>
+        </div>
+
+        <!-- Dish 2: Fried Rice -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_fried_rice_master_v2.png" alt="Fried Rice"
+                class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🍚</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹49</div>
+          </div>
+        </div>
+
+        <!-- Dish 3: Pav Bhaji -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_pav_bhaji_master_v2.png" alt="Pav Bhaji" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🥘</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹69</div>
+          </div>
+        </div>
+
+        <!-- Dish 4: Paratha -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_paratha_master_v2.png" alt="Paratha" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🫓</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹49</div>
+          </div>
+        </div>
+
+        <!-- Dish 5: Thali -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_thali_master_v2.png" alt="Thali" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🍱</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹99</div>
+          </div>
+        </div>
+
+        <!-- Dish 6: Burger -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_burger_master_v2.png" alt="Burger" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🍔</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹49</div>
+          </div>
+        </div>
+
+        <!-- Dish 7: Dosa -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_dosa_master_v2.png" alt="Dosa" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🥞</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹69</div>
+          </div>
+        </div>
+
+        <!-- Dish 8: Pizza -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center p-1">
+            <div class="dish-circle-wrap">
+              <img src="assets/images/dish_pizza_master_v2.png" alt="Pizza" class="w-full h-full object-contain"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.food-emoji-3d').style.display='flex';" />
+              <div class="food-emoji-3d large" style="display:none;">🍕</div>
+            </div>
+            <div
+              class="absolute -bottom-2 bg-brandYellow text-gray-900 font-extrabold text-sm sm:text-base px-4 py-1 rounded-full shadow-md border border-amber-300 z-10">
+              ₹99</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="bg-brandMintLight pt-16 pb-8 px-4 sm:px-6 lg:px-8 border-t border-emerald-100/90 text-gray-700">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-emerald-200/60">
+        
+        <!-- Brand Column (span 2) -->
+        <div class="lg:col-span-2 space-y-4">
+          <a href="#" class="inline-block transform -rotate-3 transition hover:scale-105">
+            <span class="font-logo font-black text-3xl sm:text-4xl text-brandPink tracking-tight drop-shadow-sm">Speedy Eats</span>
+            <div class="h-2 bg-brandPink rounded-full mt-1 w-full shadow-sm"></div>
+          </a>
+          <p class="text-gray-600 text-sm max-w-sm leading-relaxed">
+            Khaana Flying, Price Nothing! Order your favorite food at offline restaurant menu prices with zero hidden charges and free lightning-fast delivery.
+          </p>
+          <!-- Social Icons -->
+          <div class="flex items-center gap-3 pt-2">
+            <a href="#" class="w-9 h-9 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-gray-700 hover:bg-brandPink hover:text-white hover:border-brandPink transition-all shadow-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-gray-700 hover:bg-brandPink hover:text-white hover:border-brandPink transition-all shadow-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-gray-700 hover:bg-brandPink hover:text-white hover:border-brandPink transition-all shadow-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.592 9 4.708V8z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-extrabold text-gray-900 text-sm tracking-wider uppercase mb-4">Company</h4>
+          <ul class="space-y-2.5 text-sm font-semibold text-gray-600">
+            <li><a href="about.html" class="hover:text-brandPink transition-colors">About Us</a></li>
+            <li><a href="careers.html" class="hover:text-brandPink transition-colors">Careers</a></li>
+            <li><a href="blog.html" class="hover:text-brandPink transition-colors">Speedy Blog</a></li>
+            <li><a href="partner.html" class="hover:text-brandPink transition-colors">Partner With Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Support & Legal -->
+        <div>
+          <h4 class="font-extrabold text-gray-900 text-sm tracking-wider uppercase mb-4">Legal & Support</h4>
+          <ul class="space-y-2.5 text-sm font-semibold text-gray-600">
+            <li><a href="privacy.html" class="hover:text-brandPink transition-colors">Privacy Policy</a></li>
+            <li><a href="terms.html" class="hover:text-brandPink transition-colors">Terms & Conditions</a></li>
+            <li><a href="support.html" class="hover:text-brandPink transition-colors">Help & Support</a></li>
+            <li><a href="safety.html" class="hover:text-brandPink transition-colors">Safety Guidelines</a></li>
+          </ul>
+        </div>
+
+        <!-- Download App Column -->
+        <div>
+          <h4 class="font-extrabold text-gray-900 text-sm tracking-wider uppercase mb-4">Get the App</h4>
+          <div class="flex flex-row sm:flex-col gap-2.5 sm:gap-3 flex-wrap">
+            <a href="#download"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 bg-gray-900 text-white px-4 py-2.5 rounded-xl hover:bg-black transition-all border border-gray-800 shadow min-w-[140px]">
+              <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L14.81,13.12L17.67,10.26L18.91,10.97C20.31,11.77 20.31,13.06 18.91,13.86L15.91,9.16L14.81,10.26L4.74,0.19C4.94,0.07 5.18,0 5.44,0C5.9,0 6.34,0.18 6.74,0.41L15.91,9.16M4.74,23.81L14.81,13.74L15.91,14.84L6.74,23.59C6.34,23.82 5.9,24 5.44,24C5.18,24 4.94,23.93 4.74,23.81Z" />
+              </svg>
+              <div class="text-left">
+                <div class="text-[8px] uppercase font-bold text-gray-400 tracking-wider whitespace-nowrap">GET IT ON</div>
+                <div class="text-xs font-extrabold leading-none whitespace-nowrap">Google Play</div>
+              </div>
+            </a>
+            <a href="#download"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 bg-gray-900 text-white px-4 py-2.5 rounded-xl hover:bg-black transition-all border border-gray-800 shadow min-w-[140px]">
+              <svg class="w-5 h-5 fill-white shrink-0" viewBox="0 0 384 512">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-13.7 69.5-34.3z" />
+              </svg>
+              <div class="text-left">
+                <div class="text-[8px] uppercase font-bold text-gray-400 tracking-wider whitespace-nowrap">Download on</div>
+                <div class="text-xs font-extrabold leading-none whitespace-nowrap">App Store</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-gray-500">
+        <p>© 2026 Speedy Eats. All rights reserved.</p>
+        <p class="flex items-center gap-1">Made with <span class="text-brandPink">❤️</span> by <span class="text-gray-900 font-extrabold">Nayan</span> for Food Lovers in India</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ====== TOAST ====== -->
+  <div id="toast"
+    class="fixed bottom-5 inset-x-0 mx-auto w-max max-w-[94%] bg-gray-900/95 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl opacity-0 translate-y-4 pointer-events-none z-50 flex items-center justify-center gap-2 sm:gap-2.5 text-center border border-white/15 backdrop-blur-md">
+    <span class="text-brandPink text-base sm:text-lg">✨</span>
+    <span id="toast-message" class="text-xs sm:text-sm font-bold tracking-tight whitespace-nowrap">Welcome to Speedy Eats!</span>
+  </div>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+
+      function showToast(msg) {
+        if (!toast || !toastMessage) return;
+        toastMessage.textContent = msg;
+        toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        }, 3000);
+      }
+
+      // Download buttons
+      document.querySelectorAll('a[href="#download"]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          showToast('🚀 Speedy Eats App coming soon!');
+        });
+      });
+
+      // '+' buttons on food cards
+      document.querySelectorAll('button').forEach(function (btn) {
+        if (btn.textContent.trim() === '+') {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            showToast('🛒 Item added to your cart!');
+          });
+        }
+      });
+
+      // Dish items click
+      document.querySelectorAll('.group').forEach(function (dish) {
+        dish.addEventListener('click', function () {
+          const img = this.querySelector('img');
+          const name = img ? img.alt : 'Dish';
+          showToast('😋 Exploring ' + name + '!');
+        });
+      });
+
+      // Welcome toast
+      setTimeout(function () {
+        showToast('🍽️ Welcome to Speedy Eats!');
+      }, 800);
+
+    });
+  </script>
+
+</body>
+
+</html>

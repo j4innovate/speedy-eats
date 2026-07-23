@@ -1,0 +1,42 @@
+/* Custom Styles for Nothing Food Landing Page */
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-badge {
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+/* Mix Blend Mode Multiply for Seamless Image Blending */
+.blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+/* Custom Smooth Transitions */
+body {
+  overflow-x: hidden;
+}
+
+/* Custom Dish Image Glow */
+.group:hover img {
+  filter: drop-shadow(0 15px 25px rgba(12, 139, 66, 0.25));
+}
